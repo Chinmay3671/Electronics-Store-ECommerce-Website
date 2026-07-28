@@ -179,6 +179,7 @@
 		<div class="row">
 			<%
 			for (ProductBean product : products) {
+				if (product == null || product.getProdId() == null) continue;
 				int cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());
 			%>
 			<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
