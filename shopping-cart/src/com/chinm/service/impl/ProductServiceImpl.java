@@ -237,6 +237,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductBean> getAllProductsByType(String type) {
 		List<ProductBean> products = new ArrayList<ProductBean>();
+		if (type == null) type = "";
 
 		Connection con = DBUtil.provideConnection();
 
@@ -273,7 +274,7 @@ public class ProductServiceImpl implements ProductService {
 
 		if (products.isEmpty()) {
 			for (ProductBean p : getFallbackProducts()) {
-				if (p.getProdType().equalsIgnoreCase(type)) {
+				if (p != null && p.getProdType() != null && p.getProdType().equalsIgnoreCase(type)) {
 					products.add(p);
 				}
 			}
@@ -286,6 +287,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductBean> searchAllProducts(String search) {
 		List<ProductBean> products = new ArrayList<ProductBean>();
+		if (search == null) search = "";
 
 		Connection con = DBUtil.provideConnection();
 
@@ -296,10 +298,10 @@ public class ProductServiceImpl implements ProductService {
 			try {
 				ps = con.prepareStatement(
 						"select * from product where lower(ptype) like ? or lower(pname) like ? or lower(pinfo) like ?");
-				search = "%" + search.toLowerCase() + "%";
-				ps.setString(1, search);
-				ps.setString(2, search);
-				ps.setString(3, search);
+				String sPattern = "%" + search.toLowerCase() + "%";
+				ps.setString(1, sPattern);
+				ps.setString(2, sPattern);
+				ps.setString(3, sPattern);
 				rs = ps.executeQuery();
 
 				while (rs.next()) {
