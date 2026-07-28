@@ -30,8 +30,8 @@ public class DBUtil {
 						if (rb.containsKey("db.username")) username = rb.getString("db.username");
 						if (rb.containsKey("db.password")) password = rb.getString("db.password");
 					}
-				} catch (Exception e) {
-					System.err.println("ResourceBundle Notice: " + e.getMessage());
+				} catch (Throwable t) {
+					System.err.println("ResourceBundle Notice: " + t.getMessage());
 				}
 
 				String envConn = System.getenv("DB_CONNECTION_STRING");
@@ -57,8 +57,8 @@ public class DBUtil {
 					conn = null;
 				}
 			}
-		} catch (Exception e) {
-			System.err.println("DB Connection Notice: " + e.getMessage());
+		} catch (Throwable t) {
+			System.err.println("DB Connection Notice: " + t.getMessage());
 			conn = null;
 		}
 
