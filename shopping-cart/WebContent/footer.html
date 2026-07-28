@@ -1,72 +1,97 @@
+<!-- Electronics Store UI/UX Redesign -->
 <!DOCTYPE html>
 <html>
 <head>
-<title>Shoping Center</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/changes.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="css/custom_premium.css">
 </head>
-<body style="background-color: #E6F9E6;">
-	<!-- Start the footer Contacts -->
-	<!-- <a name="contact"></a> -->
-	<div class="container-fluid"
-		style="background-color: #454545; color: white; margin-top: 200px;">
+<body>
+
+	<footer class="footer-premium">
 		<div class="container">
-			<h3 class="text-center">Contact</h3>
-			<p class="text-center">
-				<em>We love our fans!</em>
-			</p>
-			<div class="row test">
-				<div class="col-md-4">
-					<p>Fan? Drop a note.</p>
-					<p>
-						<span class="glyphicon glyphicon-map-marker"></span>Pratik Khot
+			<div class="row">
+				<!-- Brand & Mission Column -->
+				<div class="col-md-4 col-sm-6 mb-4">
+					<h3 style="color: #FFFFFF; font-size: 22px; margin-top: 0; font-weight: 800;">
+						<i class="fas fa-bolt" style="color: #60A5FA;"></i> Electronics Store
+					</h3>
+					<p style="color: #94A3B8; font-size: 14px; margin-top: 15px; max-width: 320px;">
+						Next-generation electronic devices, laptops, smartphones, and audio gear built for speed, performance, and modern lifestyle.
 					</p>
-					<p>
-						<span class="glyphicon glyphicon-phone"></span>Phone: +91
-						9321083829
+					
+					<div style="margin-top: 20px; display: flex; gap: 12px;">
+						<a href="#" style="width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.08); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.2s;"><i class="fab fa-facebook-f"></i></a>
+						<a href="#" style="width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.08); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.2s;"><i class="fab fa-twitter"></i></a>
+						<a href="#" style="width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.08); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.2s;"><i class="fab fa-instagram"></i></a>
+						<a href="#" style="width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.08); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.2s;"><i class="fab fa-linkedin-in"></i></a>
+					</div>
+				</div>
+
+				<!-- Quick Links -->
+				<div class="col-md-2 col-sm-6 mb-4">
+					<h4 class="footer-heading">Categories</h4>
+					<ul class="footer-links">
+						<li><a href="index.jsp?type=mobile"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Smart Phones</a></li>
+						<li><a href="index.jsp?type=laptop"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Laptops & PCs</a></li>
+						<li><a href="index.jsp?type=tv"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Smart TVs</a></li>
+						<li><a href="index.jsp?type=speaker"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Audio & Speakers</a></li>
+						<li><a href="index.jsp?type=camera"><i class="fas fa-chevron-right" style="font-size: 10px;"></i> Digital Cameras</a></li>
+					</ul>
+				</div>
+
+				<!-- Contact Details -->
+				<div class="col-md-3 col-sm-6 mb-4">
+					<h4 class="footer-heading">Store Location</h4>
+					<p style="color: #94A3B8; font-size: 14px;">
+						<i class="fas fa-map-marker-alt" style="color: #60A5FA; margin-right: 8px;"></i> Electronics Store HQ, Tech Park
 					</p>
-					<p>
-						<span class="glyphicon glyphicon-envelope"></span>Email:
-						pratikkhot1207@gmail.com
+					<p style="color: #94A3B8; font-size: 14px;">
+						<i class="fas fa-phone-alt" style="color: #60A5FA; margin-right: 8px;"></i> +91 XXXXXXXXXX
 					</p>
-					<p>
-						<span class="glyphicon glyphicon-copyright-mark"></span>
-						Pratik Khot - 2025
+					<p style="color: #94A3B8; font-size: 14px;">
+						<i class="fas fa-envelope" style="color: #60A5FA; margin-right: 8px;"></i> support@electronicsstore.com
 					</p>
 				</div>
-				<div class="col-md-8">
+
+				<!-- Contact / Message Form -->
+				<div class="col-md-3 col-sm-6 mb-4">
+					<h4 class="footer-heading">Customer Feedback</h4>
 					<form action="fansMessage" method="post">
-						<div class="row">
-							<div class="col-sm-6 form-group">
-								<input class="form-control" id="name" name="name"
-									placeholder="Name" type="text" required>
-							</div>
-							<div class="col-sm-6 form-group">
-								<input class="form-control" id="email" name="email"
-									placeholder="Email" type="email" required>
-							</div>
+						<div class="form-group" style="margin-bottom: 10px;">
+							<input class="form-control" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;" id="name" name="name" placeholder="Your Name" type="text" required>
 						</div>
-						<textarea class="form-control" id="comments" name="comments"
-							placeholder="Comment" rows="5" required></textarea>
-						<div class="row">
-							<div class="col-md-12 form-group">
-								<button class="btn pull-right" type="submit">Send</button>
-							</div>
+						<div class="form-group" style="margin-bottom: 10px;">
+							<input class="form-control" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;" id="email" name="email" placeholder="Your Email" type="email" required>
 						</div>
+						<div class="form-group" style="margin-bottom: 10px;">
+							<textarea class="form-control" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px;" id="comments" name="comments" placeholder="Message or Feedback" rows="2" required></textarea>
+						</div>
+						<button class="btn-premium-primary" type="submit" style="width: 100%; border-radius: 8px !important;">
+							<i class="fas fa-paper-plane"></i> Send Feedback
+						</button>
 					</form>
 				</div>
 			</div>
+
+			<!-- Bottom Footer Bar -->
+			<div class="footer-bottom">
+				<div>
+					&copy; 2026 <strong>Electronics Store</strong>. All rights reserved. Built with Java & MySQL.
+				</div>
+				<div style="display: flex; gap: 15px; font-size: 20px; color: #94A3B8;">
+					<i class="fab fa-cc-visa"></i>
+					<i class="fab fa-cc-mastercard"></i>
+					<i class="fab fa-cc-paypal"></i>
+					<i class="fab fa-cc-apple-pay"></i>
+				</div>
+			</div>
 		</div>
-	</div>
-	<!-- End of Contact or about us -->
+	</footer>
 
 </body>
 </html>

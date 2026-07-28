@@ -1,191 +1,204 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ page import="com.pratik.service.impl.*,com.pratik.service.*"%>
+<%-- Electronics Store UI/UX Redesign --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="com.chinm.service.impl.*,com.chinm.service.*"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Logout Header</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="css/changes.css">
+<link rel="stylesheet" href="css/custom_premium.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body style="background-color: #E6F9E6;">
-	<!--Company Header Starting  -->
-	<div class="container-fluid text-center"
-		style="margin-top: 45px; background-color: #33cc33; color: white; padding: 5px;">
-		<h2>Pratik Electronics</h2>
-		<h6>We specialize in Electronics</h6>
-		<form class="form-inline" action="index.jsp" method="get">
-			<div class="input-group">
-				<input type="text" class="form-control" size="50" name="search"
-					placeholder="Search Items" required>
-				<div class="input-group-btn">
-					<input type="submit" class="btn btn-danger" value="Search" />
-				</div>
-			</div>
-		</form>
-		<p align="center"
-			style="color: blue; font-weight: bold; margin-top: 5px; margin-bottom: 5px;"
-			id="message"></p>
-	</div>
-	<!-- Company Header Ending -->
+<body>
 
 	<%
 	/* Checking the user credentials */
 	String userType = (String) session.getAttribute("usertype");
-	if (userType == null) { //LOGGED OUT
+	if (userType == null) { //LOGGED OUT HEADER
 	%>
 
-	<!-- Starting Navigation Bar -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
+	<!-- Glassmorphism Navbar for Guests -->
+	<nav class="navbar navbar-default navbar-fixed-top glass-navbar navbar-custom">
+		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#myNavbar" style="border: none; background: transparent; margin-top: 10px;">
+					<span class="icon-bar" style="background: #fff;"></span> 
+					<span class="icon-bar" style="background: #fff;"></span> 
+					<span class="icon-bar" style="background: #fff;"></span>
 				</button>
-				<a class="navbar-brand" href="index.jsp"><span
-					class="glyphicon glyphicon-home">&nbsp;</span>Shopping Center</a>
+				<a class="navbar-brand-logo" href="index.jsp">
+					<i class="fas fa-bolt" style="color: #60A5FA;"></i>
+					Electronics Store
+					<span class="badge-logo">PRO</span>
+				</a>
 			</div>
+			
 			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="login.jsp">Login</a></li>
-					<li><a href="register.jsp">Register</a></li>
-					<li><a href="index.jsp">Products</a></li>
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">Category <span class="caret"></span>
-					</a>
-						<ul class="dropdown-menu">
-							<li><a href="index.jsp?type=mobile">Mobiles</a></li>
-							<li><a href="index.jsp?type=tv">TVs</a></li>
-							<li><a href="index.jsp?type=laptop">Laptops</a></li>
-							<li><a href="index.jsp?type=camera">Camera</a></li>
-							<li><a href="index.jsp?type=speaker">Speakers</a></li>
-							<li><a href="index.jsp?type=tablet">Tablets</a></li>
-						</ul></li>
-				</ul>
+				<div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 15px;">
+					<!-- Search Form in Navbar -->
+					<form class="navbar-form" action="index.jsp" method="get" style="border: none; box-shadow: none; margin: 0; padding: 0;">
+						<div class="search-container-premium">
+							<i class="fas fa-search search-icon-btn"></i>
+							<input type="text" class="search-input-premium" name="search"
+								placeholder="Search laptops, phones, audio..." required>
+						</div>
+					</form>
+
+					<ul class="nav navbar-nav navbar-right" style="margin: 0;">
+						<li><a href="index.jsp" class="nav-link-custom"><i class="fas fa-store"></i> Products</a></li>
+						
+						<li class="dropdown">
+							<a class="dropdown-toggle nav-link-custom" data-toggle="dropdown" href="#">
+								<i class="fas fa-th-large"></i> Categories <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu glass-card" style="background: #0F172A !important; border: 1px solid rgba(255,255,255,0.15) !important;">
+								<li><a href="index.jsp?type=mobile" style="color: #fff !important;"><i class="fas fa-mobile-alt"></i> Mobiles</a></li>
+								<li><a href="index.jsp?type=tv" style="color: #fff !important;"><i class="fas fa-tv"></i> TVs</a></li>
+								<li><a href="index.jsp?type=laptop" style="color: #fff !important;"><i class="fas fa-laptop"></i> Laptops</a></li>
+								<li><a href="index.jsp?type=camera" style="color: #fff !important;"><i class="fas fa-camera"></i> Cameras</a></li>
+								<li><a href="index.jsp?type=speaker" style="color: #fff !important;"><i class="fas fa-volume-up"></i> Speakers</a></li>
+								<li><a href="index.jsp?type=tablet" style="color: #fff !important;"><i class="fas fa-tablet-alt"></i> Tablets</a></li>
+							</ul>
+						</li>
+						
+						<li><a href="login.jsp" class="nav-link-custom"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+						<li>
+							<a href="register.jsp" class="btn-premium-primary" style="padding: 8px 18px !important; color: #fff !important;">
+								<i class="fas fa-user-plus"></i> Register
+							</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</nav>
+
 	<%
 	} else if ("customer".equalsIgnoreCase(userType)) { //CUSTOMER HEADER
-
-	int notf = new CartServiceImpl().getCartCount((String) session.getAttribute("username"));
+		int notf = new CartServiceImpl().getCartCount((String) session.getAttribute("username"));
 	%>
-	<nav class="navbar navbar-default navbar-fixed-top">
 
-		<div class="container-fluid">
+	<nav class="navbar navbar-default navbar-fixed-top glass-navbar navbar-custom">
+		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#myNavbar" style="border: none; background: transparent; margin-top: 10px;">
+					<span class="icon-bar" style="background: #fff;"></span> 
+					<span class="icon-bar" style="background: #fff;"></span> 
+					<span class="icon-bar" style="background: #fff;"></span>
 				</button>
-				<a class="navbar-brand" href="userHome.jsp"><span
-					class="glyphicon glyphicon-home">&nbsp;</span>Shopping Center</a>
+				<a class="navbar-brand-logo" href="userHome.jsp">
+					<i class="fas fa-bolt" style="color: #60A5FA;"></i>
+					Electronics Store
+					<span class="badge-logo">PRO</span>
+				</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="userHome.jsp"><span
-							class="glyphicon glyphicon-home">Products</span></a></li>
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">Category <span class="caret"></span>
-					</a>
-						<ul class="dropdown-menu">
-							<li><a href="userHome.jsp?type=mobile">Mobiles</a></li>
-							<li><a href="userHome.jsp?type=tv">TV</a></li>
-							<li><a href="userHome.jsp?type=laptop">Laptops</a></li>
-							<li><a href="userHome.jsp?type=camera">Camera</a></li>
-							<li><a href="userHome.jsp?type=speaker">Speakers</a></li>
-							<li><a href="userHome.jsp?type=tablet">Tablets</a></li>
-						</ul></li>
-					<%
-					if (notf == 0) {
-					%>
-					<li><a href="cartDetails.jsp"> <span
-							class="glyphicon glyphicon-shopping-cart"></span>Cart
-					</a></li>
+				<div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 15px;">
+					<form class="navbar-form" action="userHome.jsp" method="get" style="border: none; box-shadow: none; margin: 0; padding: 0;">
+						<div class="search-container-premium">
+							<i class="fas fa-search search-icon-btn"></i>
+							<input type="text" class="search-input-premium" name="search"
+								placeholder="Search gadgets, accessories..." required>
+						</div>
+					</form>
 
-					<%
-					} else {
-					%>
-					<li><a href="cartDetails.jsp"
-						style="margin: 0px; padding: 0px;" id="mycart"><i
-							data-count="<%=notf%>"
-							class="fa fa-shopping-cart fa-3x icon-white badge"
-							style="background-color: #333; margin: 0px; padding: 0px; padding-bottom: 0px; padding-top: 5px;">
-						</i></a></li>
-					<%
-					}
-					%>
-					<li><a href="orderDetails.jsp">Orders</a></li>
-					<li><a href="userProfile.jsp">Profile</a></li>
-					<li><a href="./LogoutSrv">Logout</a></li>
-				</ul>
+					<ul class="nav navbar-nav navbar-right" style="margin: 0;">
+						<li><a href="userHome.jsp" class="nav-link-custom"><i class="fas fa-store"></i> Products</a></li>
+						
+						<li class="dropdown">
+							<a class="dropdown-toggle nav-link-custom" data-toggle="dropdown" href="#">
+								<i class="fas fa-th-large"></i> Categories <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu glass-card" style="background: #0F172A !important; border: 1px solid rgba(255,255,255,0.15) !important;">
+								<li><a href="userHome.jsp?type=mobile" style="color: #fff !important;"><i class="fas fa-mobile-alt"></i> Mobiles</a></li>
+								<li><a href="userHome.jsp?type=tv" style="color: #fff !important;"><i class="fas fa-tv"></i> TVs</a></li>
+								<li><a href="userHome.jsp?type=laptop" style="color: #fff !important;"><i class="fas fa-laptop"></i> Laptops</a></li>
+								<li><a href="userHome.jsp?type=camera" style="color: #fff !important;"><i class="fas fa-camera"></i> Cameras</a></li>
+								<li><a href="userHome.jsp?type=speaker" style="color: #fff !important;"><i class="fas fa-volume-up"></i> Speakers</a></li>
+								<li><a href="userHome.jsp?type=tablet" style="color: #fff !important;"><i class="fas fa-tablet-alt"></i> Tablets</a></li>
+							</ul>
+						</li>
+
+						<li>
+							<a href="cartDetails.jsp" class="nav-link-custom">
+								<i class="fas fa-shopping-bag"></i> Cart
+								<% if (notf > 0) { %>
+									<span class="cart-badge-counter"><%=notf%></span>
+								<% } %>
+							</a>
+						</li>
+
+						<li><a href="orderDetails.jsp" class="nav-link-custom"><i class="fas fa-box"></i> Orders</a></li>
+						<li><a href="userProfile.jsp" class="nav-link-custom"><i class="fas fa-user-circle"></i> Profile</a></li>
+						<li><a href="./LogoutSrv" class="nav-link-custom" style="color: #F87171 !important;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</nav>
+
 	<%
 	} else { //ADMIN HEADER
 	%>
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="adminViewProduct.jsp"><span
-					class="glyphicon glyphicon-home">&nbsp;</span>Shopping Center</a>
-			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="adminViewProduct.jsp">Products</a></li>
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">Category <span class="caret"></span>
-					</a>
-						<ul class="dropdown-menu">
-							<li><a href="adminViewProduct.jsp?type=mobile">Mobiles</a></li>
-							<li><a href="adminViewProduct.jsp?type=tv">Tvs</a></li>
-							<li><a href="adminViewProduct.jsp?type=laptop">Laptops</a></li>
-							<li><a href="adminViewProduct.jsp?type=camera">Camera</a></li>
-							<li><a href="adminViewProduct.jsp?type=speaker">Speakers</a></li>
-							<li><a href="adminViewProduct.jsp?type=tablet">Tablets</a></li>
-						</ul></li>
-					<li><a href="adminStock.jsp">Stock</a></li>
-					<li><a href="shippedItems.jsp">Shipped</a></li>
-					<li><a href="unshippedItems.jsp">Orders</a></li>
-					<!-- <li><a href=""> <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Cart</a></li> -->
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">Update Items <span
-							class="caret"></span>
-					</a>
-						<ul class="dropdown-menu">
-							<li><a href="addProduct.jsp">Add Product</a></li>
-							<li><a href="removeProduct.jsp">Remove Product</a></li>
-							<li><a href="updateProductById.jsp">Update Product</a></li>
-						</ul></li>
-					<li><a href="./LogoutSrv">Logout</a></li>
 
-				</ul>
+	<nav class="navbar navbar-default navbar-fixed-top glass-navbar navbar-custom">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#myNavbar" style="border: none; background: transparent; margin-top: 10px;">
+					<span class="icon-bar" style="background: #fff;"></span> 
+					<span class="icon-bar" style="background: #fff;"></span> 
+					<span class="icon-bar" style="background: #fff;"></span>
+				</button>
+				<a class="navbar-brand-logo" href="adminViewProduct.jsp">
+					<i class="fas fa-user-shield" style="color: #A78BFA;"></i>
+					Admin Portal
+				</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<div style="display: flex; align-items: center; justify-content: flex-end; width: 100%; flex-wrap: wrap; gap: 15px;">
+					<ul class="nav navbar-nav navbar-right" style="margin: 0;">
+						<li><a href="adminViewProduct.jsp" class="nav-link-custom"><i class="fas fa-boxes"></i> Products</a></li>
+						<li><a href="adminStock.jsp" class="nav-link-custom"><i class="fas fa-warehouse"></i> Inventory Stock</a></li>
+						<li><a href="unshippedItems.jsp" class="nav-link-custom"><i class="fas fa-shipping-fast"></i> Orders to Ship</a></li>
+						<li><a href="shippedItems.jsp" class="nav-link-custom"><i class="fas fa-check-circle"></i> Shipped</a></li>
+						
+						<li class="dropdown">
+							<a class="dropdown-toggle nav-link-custom" data-toggle="dropdown" href="#">
+								<i class="fas fa-edit"></i> Manage Items <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu glass-card" style="background: #0F172A !important; border: 1px solid rgba(255,255,255,0.15) !important;">
+								<li><a href="addProduct.jsp" style="color: #fff !important;"><i class="fas fa-plus-circle"></i> Add Product</a></li>
+								<li><a href="updateProductById.jsp" style="color: #fff !important;"><i class="fas fa-edit"></i> Update Product</a></li>
+								<li><a href="removeProduct.jsp" style="color: #fff !important;"><i class="fas fa-trash-alt"></i> Remove Product</a></li>
+							</ul>
+						</li>
+
+						<li><a href="./LogoutSrv" class="nav-link-custom" style="color: #F87171 !important;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</nav>
+
 	<%
 	}
 	%>
-	<!-- End of Navigation Bar -->
+
 </body>
 </html>
+
