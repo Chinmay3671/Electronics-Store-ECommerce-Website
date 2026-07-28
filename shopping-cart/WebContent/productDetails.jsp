@@ -52,6 +52,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body style="background: var(--bg-main);">
+<% try { %>
 
 	<jsp:include page="header.jsp" />
 
@@ -182,6 +183,7 @@
 	</div>
 
 	<%@ include file="footer.html"%>
+<% } catch (Throwable t) { System.err.println("productDetails Catch: " + t.getMessage()); } %>
 
 </body>
 </html>
