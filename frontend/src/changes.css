@@ -1,0 +1,14 @@
+/* Electronics Store Design System & UI Overhaul */
+/* Reset old overrides from changes.css that broke font-awesome and modern layouts */
+i {
+	width: auto !important;
+	height: auto !important;
+	text-align: initial !important;
+	vertical-align: initial !important;
+	position: static !important;
+}
+
+i.fa::before, i.fas::before, i.far::before, i.fab::before {
+	font-size: inherit !important;
+}
+
