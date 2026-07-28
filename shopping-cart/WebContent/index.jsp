@@ -264,7 +264,11 @@
 
 	<%
 	} catch (Throwable t) {
-		System.err.println("JSP Safe Catch: " + t.getMessage());
+		out.println("<div style='color:#F87171; background:#0F172A; padding:30px; border-radius:12px; margin:40px; font-family:monospace;'><h3>Render Debugger Notice</h3><p>" + t.toString() + "</p>");
+		for (StackTraceElement ste : t.getStackTrace()) {
+			out.println("<small>" + ste.toString() + "</small><br/>");
+		}
+		out.println("</div>");
 	}
 	%>
 
