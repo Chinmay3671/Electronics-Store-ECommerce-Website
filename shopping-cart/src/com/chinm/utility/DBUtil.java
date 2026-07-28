@@ -15,37 +15,42 @@ public class DBUtil {
 	}
 
 	public static Connection provideConnection() {
-
 		try {
 			if (conn == null || conn.isClosed()) {
 				ResourceBundle rb = ResourceBundle.getBundle("application");
-				String connectionString = rb.getString("db.connectionString");
-				String driverName = rb.getString("db.driverName");
-				String username = rb.getString("db.username");
-				String password = rb.getString("db.password");
+
+				String envConn = System.getenv("DB_CONNECTION_STRING");
+				String envDriver = System.getenv("DB_DRIVER");
+				String envUser = System.getenv("DB_USER");
+				String envPass = System.getenv("DB_PASS");
+
+				String connectionString = (envConn != null && !envConn.trim().isEmpty()) ? envConn : rb.getString("db.connectionString");
+				String driverName = (envDriver != null && !envDriver.trim().isEmpty()) ? envDriver : rb.getString("db.driverName");
+				String username = (envUser != null && !envUser.trim().isEmpty()) ? envUser : rb.getString("db.username");
+				String password = (envPass != null && !envPass.trim().isEmpty()) ? envPass : rb.getString("db.password");
+
 				try {
 					Class.forName(driverName);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 				conn = DriverManager.getConnection(connectionString, username, password);
-
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("DB Connection Warning: " + e.getMessage());
 		}
 
 		return conn;
 	}
 
 	public static void closeConnection(Connection con) {
-		/*
-		 * try { if (con != null && !con.isClosed()) {
-		 * 
-		 * con.close(); } } catch (SQLException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
-		 */
+		try {
+			if (con != null && !con.isClosed()) {
+				con.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void closeConnection(ResultSet rs) {
@@ -54,12 +59,10 @@ public class DBUtil {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -70,15 +73,11 @@ public class DBUtil {
 				try {
 					ps.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 }
-
-
