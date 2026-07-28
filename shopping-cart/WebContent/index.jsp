@@ -266,7 +266,9 @@
 	} catch (Throwable t) {
 		out.println("<div style='color:#F87171; background:#0F172A; padding:30px; border-radius:12px; margin:40px; font-family:monospace;'><h3>Render Debugger Notice</h3><p>" + t.toString() + "</p>");
 		for (StackTraceElement ste : t.getStackTrace()) {
-			out.println("<small>" + ste.toString() + "</small><br/>");
+			if (ste.getClassName().contains("chinm") || ste.getClassName().contains("jsp")) {
+				out.println("<p style='color:#60A5FA; font-weight:bold;'>" + ste.getClassName() + "." + ste.getMethodName() + " (Line " + ste.getLineNumber() + ")</p>");
+			}
 		}
 		out.println("</div>");
 	}
