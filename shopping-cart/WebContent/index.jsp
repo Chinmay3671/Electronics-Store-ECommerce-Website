@@ -23,6 +23,7 @@
 <body>
 
 	<%
+	try {
 	/* Checking the user credentials */
 	String userName = (String) session.getAttribute("username");
 	String password = (String) session.getAttribute("password");
@@ -260,6 +261,12 @@
 	</div>
 
 	<%@ include file="footer.html"%>
+
+	<%
+	} catch (Throwable t) {
+		System.err.println("JSP Safe Catch: " + t.getMessage());
+	}
+	%>
 
 </body>
 </html>
