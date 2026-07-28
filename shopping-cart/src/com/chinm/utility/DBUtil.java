@@ -17,27 +17,49 @@ public class DBUtil {
 	public static Connection provideConnection() {
 		try {
 			if (conn == null || conn.isClosed()) {
-				ResourceBundle rb = ResourceBundle.getBundle("application");
+				String connectionString = "jdbc:mysql://localhost:3306/shopping-cart";
+				String driverName = "com.mysql.cj.jdbc.Driver";
+				String username = "root";
+				String password = "";
+
+				try {
+					ResourceBundle rb = ResourceBundle.getBundle("application");
+					if (rb != null) {
+						if (rb.containsKey("db.connectionString")) connectionString = rb.getString("db.connectionString");
+						if (rb.containsKey("db.driverName")) driverName = rb.getString("db.driverName");
+						if (rb.containsKey("db.username")) username = rb.getString("db.username");
+						if (rb.containsKey("db.password")) password = rb.getString("db.password");
+					}
+				} catch (Exception e) {
+					System.err.println("ResourceBundle Notice: " + e.getMessage());
+				}
 
 				String envConn = System.getenv("DB_CONNECTION_STRING");
 				String envDriver = System.getenv("DB_DRIVER");
 				String envUser = System.getenv("DB_USER");
 				String envPass = System.getenv("DB_PASS");
 
-				String connectionString = (envConn != null && !envConn.trim().isEmpty()) ? envConn : rb.getString("db.connectionString");
-				String driverName = (envDriver != null && !envDriver.trim().isEmpty()) ? envDriver : rb.getString("db.driverName");
-				String username = (envUser != null && !envUser.trim().isEmpty()) ? envUser : rb.getString("db.username");
-				String password = (envPass != null && !envPass.trim().isEmpty()) ? envPass : rb.getString("db.password");
+				if (envConn != null && !envConn.trim().isEmpty()) connectionString = envConn;
+				if (envDriver != null && !envDriver.trim().isEmpty()) driverName = envDriver;
+				if (envUser != null && !envUser.trim().isEmpty()) username = envUser;
+				if (envPass != null && !envPass.trim().isEmpty()) password = envPass;
 
 				try {
 					Class.forName(driverName);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-				conn = DriverManager.getConnection(connectionString, username, password);
+
+				try {
+					conn = DriverManager.getConnection(connectionString, username, password);
+				} catch (SQLException sqle) {
+					System.err.println("Database Unreachable Warning: " + sqle.getMessage());
+					conn = null;
+				}
 			}
-		} catch (SQLException e) {
-			System.err.println("DB Connection Warning: " + e.getMessage());
+		} catch (Exception e) {
+			System.err.println("DB Connection Notice: " + e.getMessage());
+			conn = null;
 		}
 
 		return conn;
