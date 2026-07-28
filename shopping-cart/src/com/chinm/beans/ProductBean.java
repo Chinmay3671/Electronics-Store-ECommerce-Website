@@ -16,7 +16,7 @@ public class ProductBean implements Serializable {
 	private String prodInfo;
 	private double prodPrice;
 	private int prodQuantity;
-	private InputStream prodImage;
+	private transient InputStream prodImage;
 
 	public ProductBean(String prodId, String prodName, String prodType, String prodInfo, double prodPrice,
 			int prodQuantity, InputStream prodImage) {
@@ -87,5 +87,3 @@ public class ProductBean implements Serializable {
 	}
 
 }
-
-
