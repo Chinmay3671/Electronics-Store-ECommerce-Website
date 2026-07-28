@@ -27,24 +27,33 @@ public class JavaMailUtil {
 			properties.put("mail.smtp.starttls.enable", "true");
 			properties.put("mail.smtp.port", "587");
 
-			ResourceBundle rb = ResourceBundle.getBundle("application");
+			String emailId = "noreply@electronicsstore.com";
+			String passWord = "";
 
-			String emailId = rb.getString("mailer.email");
-			String passWord = rb.getString("mailer.password");
+			try {
+				ResourceBundle rb = ResourceBundle.getBundle("application");
+				if (rb != null) {
+					if (rb.containsKey("mailer.email")) emailId = rb.getString("mailer.email");
+					if (rb.containsKey("mailer.password")) passWord = rb.getString("mailer.password");
+				}
+			} catch (Exception e) {
+				System.err.println("ResourceBundle Notice: " + e.getMessage());
+			}
 
-			properties.put("mail.user", emailId);
-			properties.put("mail.password", passWord);
+			final String mailUser = emailId;
+			final String mailPass = passWord;
+
+			properties.put("mail.user", mailUser);
+			properties.put("mail.password", mailPass);
 
 			Session session = Session.getInstance(properties, new Authenticator() {
-
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(emailId, passWord);
+					return new PasswordAuthentication(mailUser, mailPass);
 				}
-
 			});
 
-			Message message = prepareMessage(session, emailId, recipientMailId);
+			Message message = prepareMessage(session, mailUser, recipientMailId);
 			if (message != null) {
 				Transport.send(message);
 				System.out.println("Message Sent Successfully!");
@@ -79,24 +88,33 @@ public class JavaMailUtil {
 			properties.put("mail.smtp.starttls.enable", "true");
 			properties.put("mail.smtp.port", "587");
 
-			ResourceBundle rb = ResourceBundle.getBundle("application");
+			String emailId = "noreply@electronicsstore.com";
+			String passWord = "";
 
-			String emailId = rb.getString("mailer.email");
-			String passWord = rb.getString("mailer.password");
+			try {
+				ResourceBundle rb = ResourceBundle.getBundle("application");
+				if (rb != null) {
+					if (rb.containsKey("mailer.email")) emailId = rb.getString("mailer.email");
+					if (rb.containsKey("mailer.password")) passWord = rb.getString("mailer.password");
+				}
+			} catch (Exception e) {
+				System.err.println("ResourceBundle Notice: " + e.getMessage());
+			}
 
-			properties.put("mail.user", emailId);
-			properties.put("mail.password", passWord);
+			final String mailUser = emailId;
+			final String mailPass = passWord;
+
+			properties.put("mail.user", mailUser);
+			properties.put("mail.password", mailPass);
 
 			Session session = Session.getInstance(properties, new Authenticator() {
-
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(emailId, passWord);
+					return new PasswordAuthentication(mailUser, mailPass);
 				}
-
 			});
 
-			Message message = prepareMessage(session, emailId, recipient, subject, htmlTextMessage);
+			Message message = prepareMessage(session, mailUser, recipient, subject, htmlTextMessage);
 			if (message != null) {
 				Transport.send(message);
 				System.out.println("Message Sent Successfully!");
@@ -121,5 +139,3 @@ public class JavaMailUtil {
 		return null;
 	}
 }
-
-
