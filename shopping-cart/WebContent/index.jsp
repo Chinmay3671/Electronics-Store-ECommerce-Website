@@ -40,14 +40,21 @@
 	String search = request.getParameter("search");
 	String type = request.getParameter("type");
 	String message = "Featured Electronics";
-	if (search != null) {
-		products = prodDao.searchAllProducts(search);
-		message = "Results for '" + search + "'";
-	} else if (type != null) {
-		products = prodDao.getAllProductsByType(type);
-		message = type.toUpperCase() + " Collection";
-	} else {
+	try {
+		if (search != null) {
+			products = prodDao.searchAllProducts(search);
+			message = "Results for '" + search + "'";
+		} else if (type != null) {
+			products = prodDao.getAllProductsByType(type);
+			message = type.toUpperCase() + " Collection";
+		} else {
+			products = prodDao.getAllProducts();
+		}
+	} catch (Exception e) {
 		products = prodDao.getAllProducts();
+	}
+	if (products == null) {
+		products = new ArrayList<ProductBean>();
 	}
 	if (products.isEmpty()) {
 		message = "No items found for '" + (search != null ? search : type) + "'";
