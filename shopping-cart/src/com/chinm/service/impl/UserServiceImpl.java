@@ -17,17 +17,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String registerUser(String userName, Long mobileNo, String emailId, String address, int pinCode,
 			String password) {
-
 		UserBean user = new UserBean(userName, mobileNo, emailId, address, pinCode, password);
-
-		String status = registerUser(user);
-
-		return status;
+		return registerUser(user);
 	}
 
 	@Override
 	public String registerUser(UserBean user) {
-
 		String status = "User Registration Failed!";
 
 		boolean isRegtd = isRegistered(user.getEmail());
@@ -36,36 +31,37 @@ public class UserServiceImpl implements UserService {
 			status = "Email Id Already Registered!";
 			return status;
 		}
+
 		Connection conn = DBUtil.provideConnection();
 		PreparedStatement ps = null;
+
 		if (conn != null) {
-			System.out.println("Connected Successfully!");
-		}
+			try {
+				ps = conn.prepareStatement("insert into " + IUserConstants.TABLE_USER + " values(?,?,?,?,?,?)");
+				ps.setString(1, user.getEmail());
+				ps.setString(2, user.getName());
+				ps.setLong(3, user.getMobile());
+				ps.setString(4, user.getAddress());
+				ps.setInt(5, user.getPinCode());
+				ps.setString(6, user.getPassword());
 
-		try {
+				int k = ps.executeUpdate();
 
-			ps = conn.prepareStatement("insert into " + IUserConstants.TABLE_USER + " values(?,?,?,?,?,?)");
-
-			ps.setString(1, user.getEmail());
-			ps.setString(2, user.getName());
-			ps.setLong(3, user.getMobile());
-			ps.setString(4, user.getAddress());
-			ps.setInt(5, user.getPinCode());
-			ps.setString(6, user.getPassword());
-
-			int k = ps.executeUpdate();
-
-			if (k > 0) {
-				status = "User Registered Successfully!";
-				MailMessage.registrationSuccess(user.getEmail(), user.getName().split(" ")[0]);
+				if (k > 0) {
+					status = "User Registered Successfully!";
+					try {
+						MailMessage.registrationSuccess(user.getEmail(), user.getName().split(" ")[0]);
+					} catch (Exception e) {
+						System.err.println("Mail notice skipped: " + e.getMessage());
+					}
+				}
+			} catch (SQLException e) {
+				status = "Error: " + e.getMessage();
+				e.printStackTrace();
 			}
-
-		} catch (SQLException e) {
-			status = "Error: " + e.getMessage();
-			e.printStackTrace();
 		}
 
-		DBUtil.closeConnection(ps);
+		DBUtil.closeConnection(conn);
 		DBUtil.closeConnection(ps);
 
 		return status;
@@ -76,23 +72,21 @@ public class UserServiceImpl implements UserService {
 		boolean flag = false;
 
 		Connection con = DBUtil.provideConnection();
-
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		try {
-			ps = con.prepareStatement("select * from user where email=?");
+		if (con != null) {
+			try {
+				ps = con.prepareStatement("select * from " + IUserConstants.TABLE_USER + " where email=?");
+				ps.setString(1, emailId);
+				rs = ps.executeQuery();
 
-			ps.setString(1, emailId);
+				if (rs.next())
+					flag = true;
 
-			rs = ps.executeQuery();
-
-			if (rs.next())
-				flag = true;
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		DBUtil.closeConnection(con);
@@ -104,66 +98,65 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String isValidCredential(String emailId, String password) {
-		String status = "Login Denied! Incorrect Username or Password";
+		String status = "Invalid Username or Password!";
 
 		Connection con = DBUtil.provideConnection();
-
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		try {
+		if (con != null) {
+			try {
+				ps = con.prepareStatement("select * from " + IUserConstants.TABLE_USER + " where email=? and password=?");
+				ps.setString(1, emailId);
+				ps.setString(2, password);
 
-			ps = con.prepareStatement("select * from user where email=? and password=?");
+				rs = ps.executeQuery();
 
-			ps.setString(1, emailId);
-			ps.setString(2, password);
+				if (rs.next())
+					status = "Valid";
 
-			rs = ps.executeQuery();
-
-			if (rs.next())
-				status = "valid";
-
-		} catch (SQLException e) {
-			status = "Error: " + e.getMessage();
-			e.printStackTrace();
+			} catch (SQLException e) {
+				status = "Error: " + e.getMessage();
+				e.printStackTrace();
+			}
 		}
 
 		DBUtil.closeConnection(con);
 		DBUtil.closeConnection(ps);
 		DBUtil.closeConnection(rs);
+
 		return status;
 	}
 
 	@Override
 	public UserBean getUserDetails(String emailId, String password) {
-
 		UserBean user = null;
 
 		Connection con = DBUtil.provideConnection();
-
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		try {
-			ps = con.prepareStatement("select * from user where email=? and password=?");
-			ps.setString(1, emailId);
-			ps.setString(2, password);
-			rs = ps.executeQuery();
+		if (con != null) {
+			try {
+				ps = con.prepareStatement("select * from " + IUserConstants.TABLE_USER + " where email=? and password=?");
+				ps.setString(1, emailId);
+				ps.setString(2, password);
 
-			if (rs.next()) {
-				user = new UserBean();
-				user.setName(rs.getString("name"));
-				user.setMobile(rs.getLong("mobile"));
-				user.setEmail(rs.getString("email"));
-				user.setAddress(rs.getString("address"));
-				user.setPinCode(rs.getInt("pincode"));
-				user.setPassword(rs.getString("password"));
+				rs = ps.executeQuery();
 
-				return user;
+				if (rs.next()) {
+					user = new UserBean();
+					user.setName(rs.getString("name"));
+					user.setMobile(rs.getLong("mobile"));
+					user.setEmail(rs.getString("email"));
+					user.setAddress(rs.getString("address"));
+					user.setPinCode(rs.getInt("pincode"));
+					user.setPassword(rs.getString("password"));
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 
 		DBUtil.closeConnection(con);
@@ -178,27 +171,28 @@ public class UserServiceImpl implements UserService {
 		String fname = "";
 
 		Connection con = DBUtil.provideConnection();
-
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		try {
-			ps = con.prepareStatement("select name from user where email=?");
-			ps.setString(1, emailId);
+		if (con != null) {
+			try {
+				ps = con.prepareStatement("select name from " + IUserConstants.TABLE_USER + " where email=?");
+				ps.setString(1, emailId);
 
-			rs = ps.executeQuery();
+				rs = ps.executeQuery();
 
-			if (rs.next()) {
-				fname = rs.getString(1);
+				if (rs.next()) {
+					fname = rs.getString(1).split(" ")[0];
+				}
 
-				fname = fname.split(" ")[0];
-
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
 		}
+
+		DBUtil.closeConnection(con);
+		DBUtil.closeConnection(ps);
+		DBUtil.closeConnection(rs);
 
 		return fname;
 	}
@@ -211,24 +205,25 @@ public class UserServiceImpl implements UserService {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		try {
-			ps = con.prepareStatement("select address from user where email=?");
+		if (con != null) {
+			try {
+				ps = con.prepareStatement("select address from " + IUserConstants.TABLE_USER + " where email=?");
+				ps.setString(1, userId);
 
-			ps.setString(1, userId);
+				rs = ps.executeQuery();
 
-			rs = ps.executeQuery();
+				if (rs.next())
+					userAddr = rs.getString(1);
 
-			if (rs.next())
-				userAddr = rs.getString(1);
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+
+		DBUtil.closeConnection(con);
+		DBUtil.closeConnection(ps);
+		DBUtil.closeConnection(rs);
 
 		return userAddr;
 	}
-
 }
-
-
