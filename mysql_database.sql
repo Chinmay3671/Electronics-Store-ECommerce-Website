@@ -238,3 +238,4 @@ USE `shopping-cart`;
 INSERT INTO `shopping-cart`.`usercart` (`username`, `prodid`, `quantity`) VALUES ('guest@gmail.com', 'P20230423082243', 2);
 
 COMMIT;
+

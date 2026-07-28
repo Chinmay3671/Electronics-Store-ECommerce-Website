@@ -12,3 +12,4 @@ public interface IUserConstants {
 	public String COLUMN_PASSWORD = "password";
 }
 
+

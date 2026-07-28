@@ -66,3 +66,4 @@ A production-ready, luxury E-Commerce platform built with **Java (JSP, Servlets,
 2. Copy `shopping-cart` into Tomcat's `webapps/` directory.
 3. Configure `application.properties` with your database credentials.
 4. Access `http://localhost:8080/shopping-cart/`.
+
