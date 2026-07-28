@@ -9,22 +9,30 @@
 	
 	ProductServiceImpl prodService = new ProductServiceImpl();
 	ProductBean product = null;
-	if (prodId != null && !prodId.trim().isEmpty()) {
-		product = prodService.getProductDetails(prodId);
-	}
-	if (product == null) {
-		List<ProductBean> all = prodService.getAllProducts();
-		if (all != null && !all.isEmpty()) {
-			product = all.get(0);
-		}
-	}
-
+	List<ProductBean> relatedProducts = new ArrayList<ProductBean>();
 	int cartQty = 0;
-	if (userName != null && product != null) {
-		cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());
-	}
 
-	List<ProductBean> relatedProducts = (product != null) ? prodService.getAllProductsByType(product.getProdType()) : new ArrayList<ProductBean>();
+	try {
+		if (prodId != null && !prodId.trim().isEmpty()) {
+			product = prodService.getProductDetails(prodId);
+		}
+		if (product == null) {
+			List<ProductBean> all = prodService.getAllProducts();
+			if (all != null && !all.isEmpty()) {
+				product = all.get(0);
+			}
+		}
+
+		if (userName != null && product != null) {
+			cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());
+		}
+
+		if (product != null && product.getProdType() != null) {
+			relatedProducts = prodService.getAllProductsByType(product.getProdType());
+		}
+	} catch (Exception e) {
+		System.err.println("productDetails setup catch: " + e.getMessage());
+	}
 %>
 <!DOCTYPE html>
 <html>
