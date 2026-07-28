@@ -197,10 +197,12 @@
 					</div>
 					
 					<%
-					String description = product.getProdInfo();
-					description = description.substring(0, Math.min(description.length(), 90));
+					String description = product.getProdInfo() != null ? product.getProdInfo() : "";
+					if (description.length() > 90) {
+						description = description.substring(0, 90) + "...";
+					}
 					%>
-					<div class="product-desc-premium"><%=description%>...</div>
+					<div class="product-desc-premium"><%=description%></div>
 
 					<div class="product-price-row">
 						<div>
