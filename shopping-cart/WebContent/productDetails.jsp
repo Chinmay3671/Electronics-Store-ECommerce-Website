@@ -164,6 +164,7 @@
 				<%
 				int count = 0;
 				for (ProductBean relProd : relatedProducts) {
+					if (relProd == null || relProd.getProdId() == null) continue;
 					if (!relProd.getProdId().equals(product.getProdId()) && count < 3) {
 						count++;
 				%>
