@@ -4,6 +4,7 @@
 <%@ page
 	import="com.chinm.service.impl.*,com.chinm.service.*,com.chinm.beans.*,java.util.*,javax.servlet.ServletOutputStream,java.io.*"%>
 <%
+	try {
 	String userName = (String) session.getAttribute("username");
 	String prodId = request.getParameter("pid");
 	
@@ -12,26 +13,22 @@
 	List<ProductBean> relatedProducts = new ArrayList<ProductBean>();
 	int cartQty = 0;
 
-	try {
-		if (prodId != null && !prodId.trim().isEmpty()) {
-			product = prodService.getProductDetails(prodId);
+	if (prodId != null && !prodId.trim().isEmpty()) {
+		product = prodService.getProductDetails(prodId);
+	}
+	if (product == null) {
+		List<ProductBean> all = prodService.getAllProducts();
+		if (all != null && !all.isEmpty()) {
+			product = all.get(0);
 		}
-		if (product == null) {
-			List<ProductBean> all = prodService.getAllProducts();
-			if (all != null && !all.isEmpty()) {
-				product = all.get(0);
-			}
-		}
+	}
 
-		if (userName != null && product != null) {
-			cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());
-		}
+	if (userName != null && product != null) {
+		cartQty = new CartServiceImpl().getCartItemCount(userName, product.getProdId());
+	}
 
-		if (product != null && product.getProdType() != null) {
-			relatedProducts = prodService.getAllProductsByType(product.getProdType());
-		}
-	} catch (Exception e) {
-		System.err.println("productDetails setup catch: " + e.getMessage());
+	if (product != null && product.getProdType() != null) {
+		relatedProducts = prodService.getAllProductsByType(product.getProdType());
 	}
 %>
 <!DOCTYPE html>
@@ -52,7 +49,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body style="background: var(--bg-main);">
-<% try { %>
 
 	<jsp:include page="header.jsp" />
 
@@ -183,7 +179,12 @@
 	</div>
 
 	<%@ include file="footer.html"%>
-<% } catch (Throwable t) { System.err.println("productDetails Catch: " + t.getMessage()); } %>
+
+<%
+	} catch (Throwable t) {
+		System.err.println("productDetails Catch: " + t.getMessage());
+	}
+%>
 
 </body>
 </html>
