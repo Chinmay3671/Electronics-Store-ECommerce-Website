@@ -22,7 +22,7 @@ export default function LoginPage({ onLoginSuccess }) {
   };
 
   return (
-    <div className="container" style={{ marginTop: '60px', marginBottom: '80px' }}>
+    <div className="container" style={{ marginTop: '110px', marginBottom: '80px' }}>
       <div className="row">
         <div className="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
           <div style={{
