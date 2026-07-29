@@ -86,14 +86,14 @@ export default function Navbar({ user, cartCount, onSearch, onLogout }) {
                   <a className="dropdown-toggle nav-link-custom" data-toggle="dropdown" href="#">
                     <i className="fas fa-th-large"></i> Categories <span className="caret"></span>
                   </a>
-                  <ul className="dropdown-menu glass-card" style={{ background: '#0F172A', border: '1px solid rgba(255,255,255,0.15)' }}>
-                    <li><Link to="/?type=mobile" style={{ color: '#fff' }}><i className="fas fa-mobile-alt"></i> Mobiles</Link></li>
-                    <li><Link to="/?type=tv" style={{ color: '#fff' }}><i className="fas fa-tv"></i> TVs</Link></li>
-                    <li><Link to="/?type=laptop" style={{ color: '#fff' }}><i className="fas fa-laptop"></i> Laptops</Link></li>
-                    <li><Link to="/?type=camera" style={{ color: '#fff' }}><i className="fas fa-camera"></i> Cameras</Link></li>
-                    <li><Link to="/?type=speaker" style={{ color: '#fff' }}><i className="fas fa-volume-up"></i> Speakers</Link></li>
-                    <li><Link to="/?type=tablet" style={{ color: '#fff' }}><i className="fas fa-tablet-alt"></i> Tablets</Link></li>
-                  </ul>
+                <ul className="dropdown-menu" style={{ background: '#ffffff', border: '1px solid #e2e8f0', boxShadow: '0 10px 25px rgba(15, 23, 42, 0.1)', borderRadius: '12px', padding: '8px 0' }}>
+                  <li><Link to="/?type=mobile" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-mobile-alt" style={{ color: '#2563eb', marginRight: '8px' }}></i> Mobiles</Link></li>
+                  <li><Link to="/?type=tv" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-tv" style={{ color: '#2563eb', marginRight: '8px' }}></i> TVs</Link></li>
+                  <li><Link to="/?type=laptop" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-laptop" style={{ color: '#2563eb', marginRight: '8px' }}></i> Laptops</Link></li>
+                  <li><Link to="/?type=camera" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-camera" style={{ color: '#2563eb', marginRight: '8px' }}></i> Cameras</Link></li>
+                  <li><Link to="/?type=speaker" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-volume-up" style={{ color: '#2563eb', marginRight: '8px' }}></i> Speakers</Link></li>
+                  <li><Link to="/?type=tablet" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-tablet-alt" style={{ color: '#2563eb', marginRight: '8px' }}></i> Tablets</Link></li>
+                </ul>
                 </li>
                 <li>
                   <Link to="/cart" className="nav-link-custom">
@@ -151,13 +151,13 @@ export default function Navbar({ user, cartCount, onSearch, onLogout }) {
                 <a className="dropdown-toggle nav-link-custom" data-toggle="dropdown" href="#">
                   <i className="fas fa-th-large"></i> Categories <span className="caret"></span>
                 </a>
-                <ul className="dropdown-menu glass-card" style={{ background: '#0F172A', border: '1px solid rgba(255,255,255,0.15)' }}>
-                  <li><Link to="/?type=mobile" style={{ color: '#fff' }}><i className="fas fa-mobile-alt"></i> Mobiles</Link></li>
-                  <li><Link to="/?type=tv" style={{ color: '#fff' }}><i className="fas fa-tv"></i> TVs</Link></li>
-                  <li><Link to="/?type=laptop" style={{ color: '#fff' }}><i className="fas fa-laptop"></i> Laptops</Link></li>
-                  <li><Link to="/?type=camera" style={{ color: '#fff' }}><i className="fas fa-camera"></i> Cameras</Link></li>
-                  <li><Link to="/?type=speaker" style={{ color: '#fff' }}><i className="fas fa-volume-up"></i> Speakers</Link></li>
-                  <li><Link to="/?type=tablet" style={{ color: '#fff' }}><i className="fas fa-tablet-alt"></i> Tablets</Link></li>
+                <ul className="dropdown-menu" style={{ background: '#ffffff', border: '1px solid #e2e8f0', boxShadow: '0 10px 25px rgba(15, 23, 42, 0.1)', borderRadius: '12px', padding: '8px 0' }}>
+                  <li><Link to="/?type=mobile" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-mobile-alt" style={{ color: '#2563eb', marginRight: '8px' }}></i> Mobiles</Link></li>
+                  <li><Link to="/?type=tv" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-tv" style={{ color: '#2563eb', marginRight: '8px' }}></i> TVs</Link></li>
+                  <li><Link to="/?type=laptop" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-laptop" style={{ color: '#2563eb', marginRight: '8px' }}></i> Laptops</Link></li>
+                  <li><Link to="/?type=camera" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-camera" style={{ color: '#2563eb', marginRight: '8px' }}></i> Cameras</Link></li>
+                  <li><Link to="/?type=speaker" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-volume-up" style={{ color: '#2563eb', marginRight: '8px' }}></i> Speakers</Link></li>
+                  <li><Link to="/?type=tablet" style={{ color: '#0f172a', padding: '8px 16px', fontWeight: 500 }}><i className="fas fa-tablet-alt" style={{ color: '#2563eb', marginRight: '8px' }}></i> Tablets</Link></li>
                 </ul>
               </li>
               <li><Link to="/login" className="nav-link-custom"><i className="fas fa-sign-in-alt"></i> Login</Link></li>
