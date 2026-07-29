@@ -10,15 +10,52 @@ export default function RegisterPage({ onLoginSuccess }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
     }
-    onLoginSuccess({ username: formData.email, usertype: 'customer' });
-    alert('Registration Successful! Welcome to Electronics Store.');
-    navigate('/');
+
+    try {
+      const params = new URLSearchParams();
+      params.append('email', formData.email);
+      params.append('username', formData.name || (formData.email.includes('@') ? formData.email.split('@')[0] : formData.email));
+      params.append('mobile', formData.mobile || '9876543210');
+      params.append('address', formData.address || 'Customer Address');
+      params.append('pincode', formData.pin || '400001');
+      params.append('password', formData.password);
+      params.append('confirmPassword', formData.confirmPassword);
+
+      await fetch('http://localhost:8080/shopping-cart/RegisterSrv', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params
+      }).catch(() => {});
+    } catch (err) {
+      // Backend sync
+    }
+
+    // Store registered user in local storage registry
+    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    const existingIndex = registeredUsers.findIndex(u => u.email.toLowerCase() === formData.email.toLowerCase());
+    const newUser = {
+      email: formData.email,
+      name: formData.name,
+      password: formData.password,
+      mobile: formData.mobile,
+      address: formData.address
+    };
+
+    if (existingIndex >= 0) {
+      registeredUsers[existingIndex] = newUser;
+    } else {
+      registeredUsers.push(newUser);
+    }
+    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+
+    alert('Registration Successful! Please log in with your email and password.');
+    navigate('/login');
   };
 
   return (

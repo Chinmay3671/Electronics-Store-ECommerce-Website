@@ -8,16 +8,42 @@ export default function LoginPage({ onLoginSuccess }) {
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (userType === 'admin' && username === 'admin@gmail.com' && password === 'admin') {
-      onLoginSuccess({ username, usertype: 'admin' });
-      navigate('/admin');
-    } else if (username && password) {
+    setErrorMsg('');
+
+    if (userType === 'admin') {
+      if (username === 'admin@gmail.com' && password === 'admin') {
+        onLoginSuccess({ username, usertype: 'admin' });
+        navigate('/admin');
+      } else {
+        setErrorMsg('Invalid Admin Username or Password');
+      }
+      return;
+    }
+
+    // Strict customer login validation
+    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    const localMatch = registeredUsers.find(
+      u => u.email.toLowerCase() === username.toLowerCase() && u.password === password
+    );
+
+    let isBackendValid = false;
+    try {
+      const response = await fetch(`http://localhost:8080/shopping-cart/LoginSrv?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&usertype=customer`);
+      const text = await response.text();
+      if (text.includes('valid')) {
+        isBackendValid = true;
+      }
+    } catch (err) {
+      // Backend check unavailable
+    }
+
+    if (localMatch || isBackendValid) {
       onLoginSuccess({ username, usertype: 'customer' });
       navigate('/');
     } else {
-      setErrorMsg('Invalid Username or Password');
+      setErrorMsg('Account not found or password incorrect. Please register first!');
     }
   };
 

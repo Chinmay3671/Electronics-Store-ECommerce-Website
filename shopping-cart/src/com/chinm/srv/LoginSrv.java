@@ -28,64 +28,75 @@ public class LoginSrv extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+		response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+		if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+			response.setStatus(HttpServletResponse.SC_OK);
+			return;
+		}
+
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		String userType = request.getParameter("usertype");
+		if (userType == null) userType = "customer";
+
 		response.setContentType("text/html");
 
 		String status = "Login Denied! Invalid Username or password.";
 
-		if (userType.equals("admin")) { // Login as Admin
+		if ("admin".equalsIgnoreCase(userType)) { // Login as Admin
 
-			if (password.equals("admin") && userName.equals("admin@gmail.com")) {
-				// valid
-
-				RequestDispatcher rd = request.getRequestDispatcher("adminViewProduct.jsp");
-
+			if ("admin".equals(password) && "admin@gmail.com".equalsIgnoreCase(userName)) {
 				HttpSession session = request.getSession();
-
 				session.setAttribute("username", userName);
 				session.setAttribute("password", password);
 				session.setAttribute("usertype", userType);
 
-				rd.forward(request, response);
+				try {
+					RequestDispatcher rd = request.getRequestDispatcher("adminViewProduct.jsp");
+					rd.forward(request, response);
+				} catch (Exception e) {
+					response.getWriter().write("valid");
+				}
 
 			} else {
-				// Invalid;
-				RequestDispatcher rd = request.getRequestDispatcher("login.jsp?message=" + status);
-				rd.include(request, response);
+				try {
+					RequestDispatcher rd = request.getRequestDispatcher("login.jsp?message=" + status);
+					rd.include(request, response);
+				} catch (Exception e) {
+					response.getWriter().write(status);
+				}
 			}
 
 		} else { // Login as customer
 
 			UserServiceImpl udao = new UserServiceImpl();
-
 			status = udao.isValidCredential(userName, password);
 
-			if (status.equalsIgnoreCase("valid")) {
-				// valid user
-
+			if ("valid".equalsIgnoreCase(status)) {
 				UserBean user = udao.getUserDetails(userName, password);
-
 				HttpSession session = request.getSession();
-
 				session.setAttribute("userdata", user);
-
 				session.setAttribute("username", userName);
 				session.setAttribute("password", password);
 				session.setAttribute("usertype", userType);
 
-				RequestDispatcher rd = request.getRequestDispatcher("userHome.jsp");
-
-				rd.forward(request, response);
+				try {
+					RequestDispatcher rd = request.getRequestDispatcher("userHome.jsp");
+					rd.forward(request, response);
+				} catch (Exception e) {
+					response.getWriter().write("valid");
+				}
 
 			} else {
-				// invalid user;
-
-				RequestDispatcher rd = request.getRequestDispatcher("login.jsp?message=" + status);
-
-				rd.forward(request, response);
-
+				try {
+					RequestDispatcher rd = request.getRequestDispatcher("login.jsp?message=" + status);
+					rd.forward(request, response);
+				} catch (Exception e) {
+					response.getWriter().write(status);
+				}
 			}
 		}
 
