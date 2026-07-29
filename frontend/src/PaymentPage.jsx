@@ -16,45 +16,85 @@ export default function PaymentPage({ onPaymentComplete }) {
   };
 
   return (
-    <div className="container" style={{ marginTop: '100px', marginBottom: '80px' }}>
+    <div className="container" style={{ marginTop: '110px', marginBottom: '80px' }}>
       <div className="row">
         <div className="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-          <div className="glass-card" style={{ padding: '40px', background: 'rgba(15, 23, 42, 0.9)', color: '#fff', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+          <div style={{
+            padding: '40px 45px',
+            background: '#ffffff',
+            color: '#0f172a',
+            borderRadius: '24px',
+            border: '1px solid #e2e8f0',
+            boxShadow: '0 20px 40px rgba(15, 23, 42, 0.08)'
+          }}>
             
-            <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-              <div style={{ width: '64px', height: '64px', background: 'rgba(16, 185, 129, 0.15)', borderRadius: '50%', color: 'var(--success)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px', marginBottom: '15px' }}>
-                <i className="fas fa-lock"></i>
+            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+              <div style={{ width: '64px', height: '64px', background: 'rgba(16, 185, 129, 0.12)', borderRadius: '50%', color: '#10b981', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', marginBottom: '16px' }}>
+                <i className="fas fa-shield-alt"></i>
               </div>
-              <h2 style={{ fontSize: '28px', fontWeight: 800, margin: 0, color: '#fff' }}>Secure Checkout</h2>
-              <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginTop: '6px' }}>256-Bit SSL Encrypted Payment Portal</p>
+              <h2 style={{ fontSize: '28px', fontWeight: 800, margin: 0, color: '#0f172a' }}>Secure Checkout</h2>
+              <p style={{ color: '#64748b', fontSize: '14px', marginTop: '6px' }}>256-Bit SSL Encrypted Payment Portal</p>
             </div>
 
             <form onSubmit={handlePay}>
-              <div className="form-group" style={{ marginBottom: '20px' }}>
-                <label style={{ color: '#E2E8F0', fontSize: '13px', textTransform: 'uppercase' }}>Cardholder Name</label>
-                <input type="text" className="form-control" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', height: '46px', borderRadius: '10px' }} placeholder="John Doe" value={cardName} onChange={(e) => setCardName(e.target.value)} required />
+              <div className="form-group" style={{ marginBottom: '20px', textAlign: 'left' }}>
+                <label style={{ color: '#475569', fontSize: '12px', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>Cardholder Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  style={{ background: '#ffffff', border: '1px solid #cbd5e1', color: '#0f172a', height: '46px', borderRadius: '10px', fontSize: '14px', paddingLeft: '14px' }}
+                  placeholder="John Doe"
+                  value={cardName}
+                  onChange={(e) => setCardName(e.target.value)}
+                  required
+                />
               </div>
 
-              <div className="form-group" style={{ marginBottom: '20px' }}>
-                <label style={{ color: '#E2E8F0', fontSize: '13px', textTransform: 'uppercase' }}>Card Number</label>
+              <div className="form-group" style={{ marginBottom: '20px', textAlign: 'left' }}>
+                <label style={{ color: '#475569', fontSize: '12px', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>Card Number</label>
                 <div style={{ position: 'relative' }}>
-                  <i className="far fa-credit-card" style={{ position: 'absolute', left: '16px', top: '15px', color: 'var(--text-muted)' }}></i>
-                  <input type="text" className="form-control" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', height: '46px', paddingLeft: '45px', borderRadius: '10px' }} placeholder="4532 •••• •••• 8921" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} required />
+                  <i className="far fa-credit-card" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', fontSize: '15px' }}></i>
+                  <input
+                    type="text"
+                    className="form-control"
+                    style={{ background: '#ffffff', border: '1px solid #cbd5e1', color: '#0f172a', height: '46px', paddingLeft: '42px', borderRadius: '10px', fontSize: '14px' }}
+                    placeholder="4532 •••• •••• 8921"
+                    value={cardNumber}
+                    onChange={(e) => setCardNumber(e.target.value)}
+                    required
+                  />
                 </div>
               </div>
 
               <div className="row">
-                <div className="col-xs-6 form-group" style={{ marginBottom: '25px' }}>
-                  <label style={{ color: '#E2E8F0', fontSize: '13px', textTransform: 'uppercase' }}>Expiry Date</label>
-                  <input type="text" className="form-control" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', height: '46px', borderRadius: '10px' }} placeholder="MM/YY" value={expDate} onChange={(e) => setExpDate(e.target.value)} required />
+                <div className="col-xs-6 form-group" style={{ marginBottom: '28px', textAlign: 'left' }}>
+                  <label style={{ color: '#475569', fontSize: '12px', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>Expiry Date</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    style={{ background: '#ffffff', border: '1px solid #cbd5e1', color: '#0f172a', height: '46px', borderRadius: '10px', fontSize: '14px', paddingLeft: '14px' }}
+                    placeholder="MM/YY"
+                    value={expDate}
+                    onChange={(e) => setExpDate(e.target.value)}
+                    required
+                  />
                 </div>
-                <div className="col-xs-6 form-group" style={{ marginBottom: '25px' }}>
-                  <label style={{ color: '#E2E8F0', fontSize: '13px', textTransform: 'uppercase' }}>CVV Code</label>
-                  <input type="password" maxLength="4" className="form-control" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', height: '46px', borderRadius: '10px' }} placeholder="•••" value={cvv} onChange={(e) => setCvv(e.target.value)} required />
+                <div className="col-xs-6 form-group" style={{ marginBottom: '28px', textAlign: 'left' }}>
+                  <label style={{ color: '#475569', fontSize: '12px', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em', display: 'block', marginBottom: '6px' }}>CVV Code</label>
+                  <input
+                    type="password"
+                    maxLength="4"
+                    className="form-control"
+                    style={{ background: '#ffffff', border: '1px solid #cbd5e1', color: '#0f172a', height: '46px', borderRadius: '10px', fontSize: '14px', paddingLeft: '14px' }}
+                    placeholder="•••"
+                    value={cvv}
+                    onChange={(e) => setCvv(e.target.value)}
+                    required
+                  />
                 </div>
               </div>
 
-              <button type="submit" className="btn-premium-primary" style={{ width: '100%', height: '50px', borderRadius: '12px', fontSize: '16px' }}>
+              <button type="submit" className="btn-premium-primary" style={{ width: '100%', height: '48px', borderRadius: '12px', fontSize: '15px', fontWeight: 600, background: '#2563eb', color: '#ffffff', border: 'none', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.25)' }}>
                 <i className="fas fa-check-circle"></i> Pay Now & Complete Order
               </button>
             </form>
