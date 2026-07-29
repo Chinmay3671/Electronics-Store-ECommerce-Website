@@ -12,3 +12,19 @@ i.fa::before, i.fas::before, i.far::before, i.fab::before {
 	font-size: inherit !important;
 }
 
+/* Mobile Responsive Navigation Breakpoint Rules */
+@media (max-width: 768px) {
+	.hidden-xs {
+		display: none !important;
+	}
+	.visible-xs {
+		display: flex !important;
+	}
+}
+
+@media (min-width: 769px) {
+	.visible-xs {
+		display: none !important;
+	}
+}
+
