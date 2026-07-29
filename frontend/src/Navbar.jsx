@@ -76,6 +76,7 @@ export default function Navbar({ user, cartCount, onSearch, onLogout }) {
                 </Link>
               </li>
               <li><Link to="/orders" className="nav-link-custom"><i className="fas fa-box"></i> Orders</Link></li>
+              <li><Link to="/profile" className="nav-link-custom"><i className="fas fa-user-circle" style={{ color: '#60A5FA' }}></i> My Account</Link></li>
               <li><button onClick={onLogout} className="nav-link-custom" style={{ background: 'none', border: 'none', color: '#F87171', cursor: 'pointer' }}><i className="fas fa-sign-out-alt"></i> Logout</button></li>
             </>
           ) : (

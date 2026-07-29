@@ -6,6 +6,7 @@ import HomePage from './HomePage';
 import ProductDetailsPage from './ProductDetailsPage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
+import ProfilePage from './ProfilePage';
 import CartPage from './CartPage';
 import PaymentPage from './PaymentPage';
 import OrdersPage from './OrdersPage';
@@ -61,6 +62,7 @@ export default function App() {
             <Route path="/product/:id" element={<ProductDetailsPage cart={cart} onAddToCart={handleAddToCart} onRemoveFromCart={handleRemoveFromCart} />} />
             <Route path="/login" element={<LoginPage onLoginSuccess={setUser} />} />
             <Route path="/register" element={<RegisterPage onLoginSuccess={setUser} />} />
+            <Route path="/profile" element={<ProfilePage user={user} onLogout={handleLogout} />} />
             <Route path="/cart" element={<CartPage cart={cart} onUpdateQty={handleUpdateQty} onRemove={handleRemoveFromCart} />} />
             <Route path="/payment" element={<PaymentPage onPaymentComplete={handlePaymentComplete} />} />
             <Route path="/orders" element={<OrdersPage />} />

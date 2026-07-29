@@ -40,8 +40,17 @@ export default function LoginPage({ onLoginSuccess }) {
     }
 
     if (localMatch || isBackendValid) {
-      onLoginSuccess({ username, usertype: 'customer' });
-      navigate('/');
+      const userProfile = {
+        username,
+        email: username,
+        name: localMatch ? localMatch.name : username.split('@')[0],
+        mobile: localMatch ? localMatch.mobile : '9876543210',
+        address: localMatch ? localMatch.address : 'Customer Address',
+        pinCode: localMatch ? (localMatch.pin || localMatch.pinCode) : '400001',
+        usertype: 'customer'
+      };
+      onLoginSuccess(userProfile);
+      navigate('/profile');
     } else {
       setErrorMsg('Account not found or password incorrect. Please register first!');
     }
