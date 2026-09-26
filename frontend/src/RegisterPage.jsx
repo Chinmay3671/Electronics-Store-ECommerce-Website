@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { getApiUrl } from './apiConfig';
 
 export default function RegisterPage({ onLoginSuccess }) {
   const [formData, setFormData] = useState({ name: '', email: '', mobile: '', address: '', pin: '', password: '', confirmPassword: '' });
@@ -34,7 +35,7 @@ export default function RegisterPage({ onLoginSuccess }) {
       params.append('password', formData.password);
       params.append('confirmPassword', formData.confirmPassword);
 
-      const response = await fetch('http://localhost:8080/shopping-cart/RegisterSrv', {
+      const response = await fetch(getApiUrl('/RegisterSrv'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { getApiUrl } from './apiConfig';
 
 export default function LoginPage({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
@@ -30,7 +31,7 @@ export default function LoginPage({ onLoginSuccess }) {
 
     let isBackendValid = false;
     try {
-      const response = await fetch(`http://localhost:8080/shopping-cart/LoginSrv?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&usertype=customer`);
+      const response = await fetch(getApiUrl(`/LoginSrv?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&usertype=customer`));
       const text = await response.text();
       if (text.includes('valid')) {
         isBackendValid = true;

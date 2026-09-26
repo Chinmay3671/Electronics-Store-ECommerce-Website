@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { getApiUrl } from './apiConfig';
 
 export default function Navbar({ user, cartCount, onSearch, onLogout }) {
   const [searchInput, setSearchInput] = useState('');
@@ -28,7 +29,7 @@ export default function Navbar({ user, cartCount, onSearch, onLogout }) {
   React.useEffect(() => {
     const checkDb = async () => {
       try {
-        const res = await fetch('http://localhost:8080/shopping-cart/LoginSrv?username=test&password=test', { method: 'GET' });
+        const res = await fetch(getApiUrl('/LoginSrv?username=test&password=test'), { method: 'GET' });
         if (res.ok) {
           setDbConnected(true);
         } else {

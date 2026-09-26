@@ -14,11 +14,12 @@ FROM tomcat:9.0-jdk11-openjdk-slim
 # Remove default Tomcat webapps
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy compiled WAR file as ROOT.war
+# Copy compiled WAR file as both ROOT.war and shopping-cart.war
 COPY --from=build /app/shopping-cart/target/*.war /usr/local/tomcat/webapps/ROOT.war
+COPY --from=build /app/shopping-cart/target/*.war /usr/local/tomcat/webapps/shopping-cart.war
 
-# Set Memory limits for Render's 512MB free tier to prevent OOM (Out Of Memory) early exit
-ENV JAVA_OPTS="-Xms128m -Xmx350m -XX:+UseSerialGC -Djava.awt.headless=true"
+# Set Memory limits for Render's 512MB free tier to prevent OOM and eliminate entropy delay
+ENV JAVA_OPTS="-Xms128m -Xmx350m -XX:+UseSerialGC -Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom"
 
 EXPOSE 8080 10000
 
