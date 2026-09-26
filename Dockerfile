@@ -1,5 +1,5 @@
-# Multi-stage Dockerfile optimized for Render.com (512MB RAM Limit)
-FROM maven:3.8.6-openjdk-11-slim AS build
+# Multi-stage Dockerfile optimized for Render.com (512MB RAM Limit & Linux cgroup v2)
+FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copy Maven POM and source
@@ -8,8 +8,8 @@ COPY shopping-cart /app/shopping-cart
 # Package WAR file
 RUN cd /app/shopping-cart && mvn clean package -DskipTests
 
-# Runtime stage: Tomcat 9 on Java 11
-FROM tomcat:9.0-jdk11-openjdk-slim
+# Runtime stage: Tomcat 9 on Java 17 Temurin (Fully patched for cgroup v2)
+FROM tomcat:9.0-jre17-temurin
 
 # Remove default Tomcat webapps
 RUN rm -rf /usr/local/tomcat/webapps/*
