@@ -43,32 +43,32 @@ export default function HomePage({ cart, onAddToCart, onRemoveFromCart }) {
   return (
     <div style={{ marginTop: '70px' }}>
       {/* Hero Banner Section */}
-      <section class="hero-section-premium animate-fade-in">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-7 col-sm-12">
-              <div class="hero-pill-badge">
-                <i class="fas fa-fire" style={{ color: '#F59E0B' }}></i> Summer Sale - Extra 15% OFF
+      <section className="hero-section-premium animate-fade-in">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-md-7 col-sm-12">
+              <div className="hero-pill-badge">
+                <i className="fas fa-fire" style={{ color: '#F59E0B' }}></i> Summer Sale - Extra 15% OFF
               </div>
-              <h1 class="hero-title">
+              <h1 className="hero-title">
                 Next-Gen Electronics.<br/>Designed for Power.
               </h1>
-              <p class="hero-subtitle">
+              <p className="hero-subtitle">
                 Discover cutting-edge smartphones, ultra-thin laptops, smart TVs, and pro audio gear engineered for peak performance.
               </p>
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-                <a href="#catalog" class="btn-premium-primary" style={{ padding: '12px 28px', fontSize: '15px' }}>
-                  <i class="fas fa-shopping-bag"></i> Explore Catalog
+                <a href="#catalog" className="btn-premium-primary" style={{ padding: '12px 28px', fontSize: '15px' }}>
+                  <i className="fas fa-shopping-bag"></i> Explore Catalog
                 </a>
-                <Link to="/?type=laptop#catalog" class="btn-premium-secondary" style={{ padding: '12px 24px', fontSize: '15px' }}>
-                  <i class="fas fa-laptop"></i> View Laptops
+                <Link to="/?type=laptop#catalog" className="btn-premium-secondary" style={{ padding: '12px 24px', fontSize: '15px' }}>
+                  <i className="fas fa-laptop"></i> View Laptops
                 </Link>
               </div>
             </div>
-            <div class="col-md-5 col-sm-12 hidden-xs text-center">
+            <div className="col-md-5 col-sm-12 hidden-xs text-center">
               <div style={{ position: 'relative', display: 'inline-block' }}>
                 <div style={{ width: '280px', height: '280px', background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(124, 58, 237, 0.2))', borderRadius: '50%', filter: 'blur(30px)', position: 'absolute', top: 0, left: 0 }}></div>
-                <i class="fas fa-laptop-code" style={{ fontSize: '160px', color: 'rgba(255,255,255,0.9)', position: 'relative', zIndex: 2, textShadow: '0 20px 40px rgba(0,0,0,0.5)' }}></i>
+                <i className="fas fa-laptop-code" style={{ fontSize: '160px', color: 'rgba(255,255,255,0.9)', position: 'relative', zIndex: 2, textShadow: '0 20px 40px rgba(0,0,0,0.5)' }}></i>
               </div>
             </div>
           </div>
@@ -76,52 +76,52 @@ export default function HomePage({ cart, onAddToCart, onRemoveFromCart }) {
       </section>
 
       {/* Feature Highlights Bar */}
-      <div class="container">
-        <div class="features-bar-premium">
-          <div class="feature-box-premium">
-            <div class="feature-icon-wrapper">
-              <i class="fas fa-shipping-fast"></i>
+      <div className="container">
+        <div className="features-bar-premium">
+          <div className="feature-box-premium">
+            <div className="feature-icon-wrapper">
+              <i className="fas fa-shipping-fast"></i>
             </div>
             <div>
-              <h4 class="feature-title">Free Express Shipping</h4>
-              <p class="feature-desc">On orders over Rs. 999 across India</p>
+              <h4 className="feature-title">Free Express Shipping</h4>
+              <p className="feature-desc">On orders over Rs. 999 across India</p>
             </div>
           </div>
 
-          <div class="feature-box-premium">
-            <div class="feature-icon-wrapper" style={{ color: 'var(--secondary)', background: 'rgba(124, 58, 237, 0.1)' }}>
-              <i class="fas fa-shield-alt"></i>
+          <div className="feature-box-premium">
+            <div className="feature-icon-wrapper" style={{ color: 'var(--secondary)', background: 'rgba(124, 58, 237, 0.1)' }}>
+              <i className="fas fa-shield-alt"></i>
             </div>
             <div>
-              <h4 class="feature-title">100% Brand Guarantee</h4>
-              <p class="feature-desc">Authentic products with warranty</p>
+              <h4 className="feature-title">100% Brand Guarantee</h4>
+              <p className="feature-desc">Authentic products with warranty</p>
             </div>
           </div>
 
-          <div class="feature-box-premium">
-            <div class="feature-icon-wrapper" style={{ color: 'var(--accent)', background: 'rgba(6, 182, 212, 0.1)' }}>
-              <i class="fas fa-undo-alt"></i>
+          <div className="feature-box-premium">
+            <div className="feature-icon-wrapper" style={{ color: 'var(--accent)', background: 'rgba(6, 182, 212, 0.1)' }}>
+              <i className="fas fa-undo-alt"></i>
             </div>
             <div>
-              <h4 class="feature-title">7-Day Easy Returns</h4>
-              <p class="feature-desc">Hassle-free replacement policy</p>
+              <h4 className="feature-title">7-Day Easy Returns</h4>
+              <p className="feature-desc">Hassle-free replacement policy</p>
             </div>
           </div>
 
-          <div class="feature-box-premium">
-            <div class="feature-icon-wrapper" style={{ color: 'var(--success)', background: 'rgba(16, 185, 129, 0.1)' }}>
-              <i class="fas fa-headset"></i>
+          <div className="feature-box-premium">
+            <div className="feature-icon-wrapper" style={{ color: 'var(--success)', background: 'rgba(16, 185, 129, 0.1)' }}>
+              <i className="fas fa-headset"></i>
             </div>
             <div>
-              <h4 class="feature-title">24/7 Dedicated Support</h4>
-              <p class="feature-desc">Instant customer assistance</p>
+              <h4 className="feature-title">24/7 Dedicated Support</h4>
+              <p className="feature-desc">Instant customer assistance</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Product Catalog */}
-      <div class="container" id="catalog" style={{ marginBottom: '60px' }}>
+      <div className="container" id="catalog" style={{ marginBottom: '60px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', marginBottom: '25px', gap: '15px' }}>
           <div>
             <h2 style={{ fontSize: '28px', margin: 0, textTransform: 'capitalize' }}>{headerMessage}</h2>
@@ -129,81 +129,81 @@ export default function HomePage({ cart, onAddToCart, onRemoveFromCart }) {
           </div>
 
           {/* Category Filter Pills */}
-          <div class="category-filter-bar" style={{ marginBottom: 0 }}>
-            <Link to="/" class={`cat-pill-btn ${!typeParam && !searchParam ? 'cat-pill-active' : ''}`}>
-              <i class="fas fa-border-all"></i> All
+          <div className="category-filter-bar" style={{ marginBottom: 0 }}>
+            <Link to="/" className={`cat-pill-btn ${!typeParam && !searchParam ? 'cat-pill-active' : ''}`}>
+              <i className="fas fa-border-all"></i> All
             </Link>
-            <Link to="/?type=mobile" class={`cat-pill-btn ${typeParam === 'mobile' ? 'cat-pill-active' : ''}`}>
-              <i class="fas fa-mobile-alt"></i> Mobiles
+            <Link to="/?type=mobile" className={`cat-pill-btn ${typeParam === 'mobile' ? 'cat-pill-active' : ''}`}>
+              <i className="fas fa-mobile-alt"></i> Mobiles
             </Link>
-            <Link to="/?type=laptop" class={`cat-pill-btn ${typeParam === 'laptop' ? 'cat-pill-active' : ''}`}>
-              <i class="fas fa-laptop"></i> Laptops
+            <Link to="/?type=laptop" className={`cat-pill-btn ${typeParam === 'laptop' ? 'cat-pill-active' : ''}`}>
+              <i className="fas fa-laptop"></i> Laptops
             </Link>
-            <Link to="/?type=tv" class={`cat-pill-btn ${typeParam === 'tv' ? 'cat-pill-active' : ''}`}>
-              <i class="fas fa-tv"></i> TVs
+            <Link to="/?type=tv" className={`cat-pill-btn ${typeParam === 'tv' ? 'cat-pill-active' : ''}`}>
+              <i className="fas fa-tv"></i> TVs
             </Link>
-            <Link to="/?type=speaker" class={`cat-pill-btn ${typeParam === 'speaker' ? 'cat-pill-active' : ''}`}>
-              <i class="fas fa-volume-up"></i> Audio
+            <Link to="/?type=speaker" className={`cat-pill-btn ${typeParam === 'speaker' ? 'cat-pill-active' : ''}`}>
+              <i className="fas fa-volume-up"></i> Audio
             </Link>
-            <Link to="/?type=camera" class={`cat-pill-btn ${typeParam === 'camera' ? 'cat-pill-active' : ''}`}>
-              <i class="fas fa-camera"></i> Cameras
+            <Link to="/?type=camera" className={`cat-pill-btn ${typeParam === 'camera' ? 'cat-pill-active' : ''}`}>
+              <i className="fas fa-camera"></i> Cameras
             </Link>
           </div>
         </div>
 
         {/* Product Grid */}
-        <div class="row">
+        <div className="row">
           {filteredProducts.map(product => {
             const qty = getCartQuantity(product.pid);
             return (
-              <div key={product.pid} class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div class="product-card-premium">
-                  <div class="product-img-wrapper">
-                    <span class="product-tag-category">{product.ptype}</span>
+              <div key={product.pid} className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div className="product-card-premium">
+                  <div className="product-img-wrapper">
+                    <span className="product-tag-category">{product.ptype}</span>
                     <Link to={`/product/${product.pid}`}>
                       <img src={`/images/${product.image}`} alt={product.pname} loading="lazy" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80'; }} />
                     </Link>
                   </div>
 
-                  <div class="product-title-premium">
+                  <div className="product-title-premium">
                     <Link to={`/product/${product.pid}`} style={{ color: 'var(--text-heading)', textDecoration: 'none' }}>
                       {product.pname}
                     </Link>
                   </div>
 
-                  <div class="product-desc-premium">
+                  <div className="product-desc-premium">
                     {product.pinfo.length > 90 ? `${product.pinfo.substring(0, 90)}...` : product.pinfo}
                   </div>
 
-                  <div class="product-price-row">
+                  <div className="product-price-row">
                     <div>
                       <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, display: 'block' }}>Price</span>
-                      <span class="product-price-amount">
-                        <span class="product-price-currency">Rs.</span>{product.pprice.toFixed(2)}
+                      <span className="product-price-amount">
+                        <span className="product-price-currency">Rs.</span>{product.pprice.toFixed(2)}
                       </span>
                     </div>
                     <div style={{ color: 'var(--warning)', fontSize: '13px', fontWeight: 600 }}>
-                      <i class="fas fa-star"></i> 4.8
+                      <i className="fas fa-star"></i> 4.8
                     </div>
                   </div>
 
-                  <div class="product-btn-group">
+                  <div className="product-btn-group">
                     {qty === 0 ? (
                       <>
-                        <button onClick={() => onAddToCart(product.pid, 1)} class="btn-premium-secondary">
-                          <i class="fas fa-cart-plus"></i> Add to Cart
+                        <button onClick={() => onAddToCart(product.pid, 1)} className="btn-premium-secondary">
+                          <i className="fas fa-cart-plus"></i> Add to Cart
                         </button>
-                        <Link to="/cart" onClick={() => onAddToCart(product.pid, 1)} class="btn-premium-primary" style={{ textAlign: 'center', lineHeight: '2.4' }}>
-                          <i class="fas fa-bolt"></i> Buy Now
+                        <Link to="/cart" onClick={() => onAddToCart(product.pid, 1)} className="btn-premium-primary" style={{ textAlign: 'center', lineHeight: '2.4' }}>
+                          <i className="fas fa-bolt"></i> Buy Now
                         </Link>
                       </>
                     ) : (
                       <>
-                        <button onClick={() => onRemoveFromCart(product.pid)} class="btn-premium-danger">
-                          <i class="fas fa-trash-alt"></i> Remove
+                        <button onClick={() => onRemoveFromCart(product.pid)} className="btn-premium-danger">
+                          <i className="fas fa-trash-alt"></i> Remove
                         </button>
-                        <Link to="/cart" class="btn-premium-primary" style={{ textAlign: 'center', lineHeight: '2.4' }}>
-                          <i class="fas fa-shopping-bag"></i> Checkout
+                        <Link to="/cart" className="btn-premium-primary" style={{ textAlign: 'center', lineHeight: '2.4' }}>
+                          <i className="fas fa-shopping-bag"></i> Checkout
                         </Link>
                       </>
                     )}

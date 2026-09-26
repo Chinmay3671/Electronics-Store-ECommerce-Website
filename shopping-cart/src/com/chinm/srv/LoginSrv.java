@@ -83,19 +83,21 @@ public class LoginSrv extends HttpServlet {
 				session.setAttribute("password", password);
 				session.setAttribute("usertype", userType);
 
+				response.getWriter().write("valid");
 				try {
 					RequestDispatcher rd = request.getRequestDispatcher("userHome.jsp");
-					rd.forward(request, response);
+					rd.include(request, response);
 				} catch (Exception e) {
-					response.getWriter().write("valid");
+					// Response already written
 				}
 
 			} else {
+				response.getWriter().write(status);
 				try {
 					RequestDispatcher rd = request.getRequestDispatcher("login.jsp?message=" + status);
-					rd.forward(request, response);
+					rd.include(request, response);
 				} catch (Exception e) {
-					response.getWriter().write(status);
+					// Response already written
 				}
 			}
 		}

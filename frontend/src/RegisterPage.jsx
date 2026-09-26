@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function RegisterPage({ onLoginSuccess }) {
   const [formData, setFormData] = useState({ name: '', email: '', mobile: '', address: '', pin: '', password: '', confirmPassword: '' });
   const [error, setError] = useState('');
+  const [statusMsg, setStatusMsg] = useState({ type: '', text: '' });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -12,10 +13,16 @@ export default function RegisterPage({ onLoginSuccess }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setStatusMsg({ type: '', text: '' });
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
     }
+
+    let isDbSaved = false;
+    let backendMessage = '';
 
     try {
       const params = new URLSearchParams();
@@ -27,16 +34,27 @@ export default function RegisterPage({ onLoginSuccess }) {
       params.append('password', formData.password);
       params.append('confirmPassword', formData.confirmPassword);
 
-      await fetch('http://localhost:8080/shopping-cart/RegisterSrv', {
+      const response = await fetch('http://localhost:8080/shopping-cart/RegisterSrv', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params
-      }).catch(() => {});
+      });
+
+      if (response.ok) {
+        const text = await response.text();
+        backendMessage = text;
+        if (text.toLowerCase().includes('successfully')) {
+          isDbSaved = true;
+        } else if (text.toLowerCase().includes('already registered')) {
+          setError('Email address is already registered in Database! Please log in.');
+          return;
+        }
+      }
     } catch (err) {
-      // Backend sync
+      backendMessage = 'Backend server unreachable';
     }
 
-    // Store registered user in local storage registry
+    // Always store in local registry to ensure login works on this client
     const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
     const existingIndex = registeredUsers.findIndex(u => u.email.toLowerCase() === formData.email.toLowerCase());
     const newUser = {
@@ -44,7 +62,9 @@ export default function RegisterPage({ onLoginSuccess }) {
       name: formData.name,
       password: formData.password,
       mobile: formData.mobile,
-      address: formData.address
+      address: formData.address,
+      pin: formData.pin,
+      source: isDbSaved ? 'MySQL Database & Session' : 'Local Session Registry'
     };
 
     if (existingIndex >= 0) {
@@ -54,9 +74,15 @@ export default function RegisterPage({ onLoginSuccess }) {
     }
     localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
 
-    alert('Registration Successful! Please log in with your email and password.');
+    if (isDbSaved) {
+      alert('Registration Successful! Saved to MySQL Database. You can now log in.');
+    } else {
+      alert('Registration Completed! (Saved in local session registry. Note: Start MySQL/XAMPP server for cross-device persistence). You can now log in.');
+    }
     navigate('/login');
   };
+
+
 
   return (
     <div className="container" style={{ marginTop: '110px', marginBottom: '80px' }}>

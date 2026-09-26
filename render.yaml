@@ -1,0 +1,28 @@
+# Render Blueprint Configuration (render.yaml)
+services:
+  # 1. React + Vite Frontend (Render Static Site - Free Tier, No RAM Limits)
+  - type: web
+    name: electronics-store-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  # 2. Java Tomcat Backend (Render Web Service Docker)
+  - type: web
+    name: electronics-store-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: JAVA_OPTS
+        value: "-Xms128m -Xmx350m -XX:+UseSerialGC -Djava.awt.headless=true"
+      - key: DB_CONNECTION_STRING
+        value: jdbc:mysql://your-db-host:3306/shopping-cart?useSSL=false&allowPublicKeyRetrieval=true
+      - key: DB_USER
+        value: root
+      - key: DB_PASS
+        value: password

@@ -23,16 +23,56 @@ export default function Navbar({ user, cartCount, onSearch, onLogout }) {
     setIsCategoriesOpen(false);
   };
 
+  const [dbConnected, setDbConnected] = useState(null); // null | true | false
+
+  React.useEffect(() => {
+    const checkDb = async () => {
+      try {
+        const res = await fetch('http://localhost:8080/shopping-cart/LoginSrv?username=test&password=test', { method: 'GET' });
+        if (res.ok) {
+          setDbConnected(true);
+        } else {
+          setDbConnected(false);
+        }
+      } catch (err) {
+        setDbConnected(false);
+      }
+    };
+    checkDb();
+  }, []);
+
   return (
     <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, background: '#0f172a', borderBottom: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', minHeight: '64px', padding: '8px 15px' }}>
         
         {/* LOGO (LEFT) */}
-        <Link className="navbar-brand-logo" to={userType === 'admin' ? '/admin' : '/'} onClick={closeMobileMenu} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#fff', fontSize: '20px', fontWeight: 800, textDecoration: 'none' }}>
-          <i className={userType === 'admin' ? "fas fa-user-shield" : "fas fa-bolt"} style={{ color: userType === 'admin' ? '#A78BFA' : '#60A5FA' }}></i>
-          {userType === 'admin' ? 'Admin Portal' : 'Electronics Store'}
-          {userType !== 'admin' && <span className="badge-logo" style={{ background: 'linear-gradient(135deg, #2563eb, #7c3aed)', color: '#fff', padding: '2px 8px', borderRadius: '8px', fontSize: '10px', fontWeight: 800, textTransform: 'uppercase' }}>PRO</span>}
-        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Link className="navbar-brand-logo" to={userType === 'admin' ? '/admin' : '/'} onClick={closeMobileMenu} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#fff', fontSize: '20px', fontWeight: 800, textDecoration: 'none' }}>
+            <i className={userType === 'admin' ? "fas fa-user-shield" : "fas fa-bolt"} style={{ color: userType === 'admin' ? '#A78BFA' : '#60A5FA' }}></i>
+            {userType === 'admin' ? 'Admin Portal' : 'Electronics Store'}
+            {userType !== 'admin' && <span className="badge-logo" style={{ background: 'linear-gradient(135deg, #2563eb, #7c3aed)', color: '#fff', padding: '2px 8px', borderRadius: '8px', fontSize: '10px', fontWeight: 800, textTransform: 'uppercase' }}>PRO</span>}
+          </Link>
+
+          <span
+            title={dbConnected ? "Connected to MySQL Database (Port 3306)" : "Running in Local Session Mode (MySQL server offline)"}
+            style={{
+              background: dbConnected ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)',
+              color: dbConnected ? '#34d399' : '#fbbf24',
+              border: `1px solid ${dbConnected ? 'rgba(16, 185, 129, 0.3)' : 'rgba(245, 158, 11, 0.3)'}`,
+              borderRadius: '9999px',
+              padding: '3px 10px',
+              fontSize: '11px',
+              fontWeight: 600,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              cursor: 'help'
+            }}
+          >
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: dbConnected ? '#34d399' : '#fbbf24' }}></span>
+            {dbConnected ? 'DB Connected' : 'Local Session Mode'}
+          </span>
+        </div>
 
         {/* SEARCH BAR (DESKTOP) */}
         {userType !== 'admin' && (

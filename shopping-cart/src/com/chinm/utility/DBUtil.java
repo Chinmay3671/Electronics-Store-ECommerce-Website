@@ -67,11 +67,17 @@ public class DBUtil {
 
 	public static void closeConnection(Connection con) {
 		try {
-			if (con != null && !con.isClosed()) {
-				con.close();
+			if (con != null) {
+				if (!con.isClosed()) {
+					con.close();
+				}
+				if (con == conn) {
+					conn = null;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			conn = null;
 		}
 	}
 

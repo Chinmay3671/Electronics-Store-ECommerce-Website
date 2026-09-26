@@ -83,11 +83,12 @@ public class RegisterSrv extends HttpServlet {
 			status = "Password not matching!";
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("register.jsp?message=" + status);
+		response.getWriter().write(status);
 		try {
-			rd.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("register.jsp?message=" + status);
+			rd.include(request, response);
 		} catch (Exception e) {
-			response.getWriter().write(status);
+			// Response already written
 		}
 	}
 
