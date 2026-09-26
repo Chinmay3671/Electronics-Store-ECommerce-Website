@@ -23,9 +23,10 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     plan: free
+    healthCheckPath: /health
     envVars:
       - key: JAVA_OPTS
-        value: "-Xms128m -Xmx350m -XX:+UseSerialGC -Djava.awt.headless=true"
+        value: "-Xms128m -Xmx350m -XX:+UseSerialGC -Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom"
       - key: DB_CONNECTION_STRING
         value: jdbc:mysql://your-db-host:3306/shopping-cart?useSSL=false&allowPublicKeyRetrieval=true
       - key: DB_USER
